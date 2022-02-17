@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Rocket Gallery</title>
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" width=640 height=360 style="width: 640px; height: 360px; background: #231F20"></canvas>
+    <script src="Build/arenabuild.loader.js"></script>
+    <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/arenabuild.data",
+        frameworkUrl: "Build/arenabuild.framework.js",
+        codeUrl: "Build/arenabuild.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "MPG3",
+        productName: "Rocket Gallery",
+        productVersion: "Arena++",
+        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+    </script>
+	<ul>Controls!<br>Player
+	<li>W/S-Move forward/backward!</li>
+	<li>A/D-Turn left/right!</li>
+	<li>Space-Jump!</li>
+	<li>Mouse 1-Fire Rocket!</li>
+	<li>Z-Toggle jetpack!</li>
+	</ul>
+	<ul>Some extra things to note:
+	<li>You do not have aerial control unless you have jetboots[UNOBTAINABLE IN THIS BUILD] or you activate your jetpack.</li>
+	<li>Health regen begins after 3 seconds, and recharges 3 units every second.</li>
+	<li>You reload a rocket every 150 milliseconds.</li>
+	<li>Fuel regen begins after 800 milliseconds, and recharges .5 units every second(or 1 unit every second if you have increased fuel.)</li>
+	</ul>
+  </body>
+</html>

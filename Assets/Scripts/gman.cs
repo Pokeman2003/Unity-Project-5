@@ -150,7 +150,7 @@ public class gman : MonoBehaviour
         GUI.Box(new Rect(20, 80, 150, 25), "ROCKETS:" + rLoaded);
 
         //Debug of the day!
-        int DotD = 900; //DotD Offset
+        int DotD = 1080; //DotD Offset
         GUI.Box(new Rect(DotD, 10, 150, 25), "DEBUG OF THE DAY");
         int DotDo = 0; //DotD Offset
         //Rocketpack

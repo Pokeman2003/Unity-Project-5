@@ -1,0 +1,12 @@
+
+BINARYEN_ROOT = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.2.0b9\\Editor\\Data\\PlaybackEngines\\WebGLSupport\\BuildTools\\Emscripten\\llvm\\binaryen'
+EMSCRIPTEN_ROOT = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.2.0b9\\Editor\\Data\\PlaybackEngines\\WebGLSupport\\BuildTools\\Emscripten\\emscripten'
+EMSCRIPTEN_NATIVE_OPTIMIZER = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.2.0b9\\Editor\\Data\\PlaybackEngines\\WebGLSupport\\BuildTools\\Emscripten\\llvm\\optimizer'
+LLVM_ROOT = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.2.0b9\\Editor\\Data\\PlaybackEngines\\WebGLSupport\\BuildTools\\Emscripten\\llvm'
+NODE_JS = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.2.0b9\\Editor\\Data\\PlaybackEngines\\WebGLSupport\\BuildTools\\Emscripten\\node\\node.exe'
+PYTHON = 'C:\\Program Files\\Unity\\Hub\\Editor\\2021.2.0b9\\Editor\\Data\\PlaybackEngines\\WebGLSupport\\BuildTools\\Emscripten\\python\\python.exe'
+
+COMPILER_ENGINE = NODE_JS
+JS_ENGINES = [NODE_JS]
+
+# (the above may also need JAVA='...' for the Closure compiler if we use it... probably desirable for release)

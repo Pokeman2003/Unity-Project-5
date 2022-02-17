@@ -41,12 +41,19 @@ public class rocketbehavior : MonoBehaviour
     // FixedUpdate is called once per physics update.
     void FixedUpdate()
     {
-        if (projectileMaxSpeed > projectileSpeed)
+        Debug.Log(transform.forward * projectileSpeed);
+        if (projectileMaxSpeed > projectileSpeed && speedCount > primeTime)
         {
             //Debug.Log(speedCount + "." + projectileSpeed);
-            projectileSpeed = projectileSpeed + (Mathf.Pow(projectileVelocity, speedCount) * Time.fixedDeltaTime);
+            rB.isKinematic = false;
             speedCount = speedCount + 1;
+            projectileSpeed = projectileSpeed + (Mathf.Pow(projectileVelocity, speedCount) * Time.fixedDeltaTime);
             rB.velocity = transform.forward * (projectileSpeed);
+        } else
+        {
+            speedCount = speedCount + 1;
+            projectileSpeed = projectileSpeed + (Mathf.Pow(projectileVelocity, speedCount) * Time.fixedDeltaTime);
+            transform.position += transform.forward * projectileSpeed * Time.fixedDeltaTime;
         }
     }
 }
