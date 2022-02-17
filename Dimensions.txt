@@ -1,0 +1,7 @@
+Lava plane = 111+ the actual combat area.
+Pillars = 1,18,1
+Walls = 21,4.8,1
+Ground = 65, 61, 65
+Scale = 1/4th
+Bridge distances = 47 (adjusted with platform size=28)
+Spawn location size=5, 1.2, 5
