@@ -1,0 +1,18 @@
+5x5 grid of platforms connected by destructible bridges. The outer ones lack spawn locations for players.
+Center=Center platform
+I-Inner
+O-Outer
+M-Medium
+L-Left
+R-Left
+U-Upper
+B-Backing
+
+OMRU = Outer Medium Right Upper
+References the one right above the outer right.
+OFLB = Outer Far Left Backing
+References the far left back corner.
+OLB = Outer Left Backing
+References the one just left of the back piece.
+OF = Outer Front
+References the one all the way in the front.

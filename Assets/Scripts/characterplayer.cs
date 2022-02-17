@@ -7,9 +7,9 @@ public class characterplayer : MonoBehaviour
     //Speeds.
     public float movementSpeed = 16f; //A little call back, ROBLOXians move at 16 studs a second.
     public float rotationSpeed = 96f; //For now, a slow, but manageable speed. I don't want a cap, I want mouse control in the future. Very important given the verticality of my game.
-    public float jumpSpeed = 8f; //How much velocity to add to our jump height.
-    public float jetpackSpeed = 1.8f;
-    private float speedLimiter = .5f;
+    public float jumpSpeed = 32f; //How much velocity to add to our jump height.
+    public float jetpackSpeed = 1.7f; //How fast the jetpack actually is.
+    private float speedLimiter = .5f; //A speed limiter applied to everything EXCEPT the jetpack.
 
     //States and handling.
     enum currentAction { Default, Jump, Run, Die };
@@ -21,6 +21,10 @@ public class characterplayer : MonoBehaviour
     public GameObject playerProjectile; //The projectile. Has to be installed in the Unity editor, much to my chagrin.
     //Jetpack.
     private bool activeJetpack = false;
+    //Jumpjet
+    private bool airControl = false;
+    private float airMovementX;
+    //private float airMovementY;
 
     //Horizontal and Vertical inputs. This is a new way to handle that, and explorercam.cs could probably use it, but explorercam.cs is just a generic placeholder.
     private float verticalIn;
@@ -41,32 +45,25 @@ public class characterplayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() 
+    void Update()
     {
         //Intellisense really screwed me over. I'm really considering refactoring verticalInput and horizontalInput to drop INPUT because it kept trying to autocomplete to that instead of my intended Input.GetAxis.
         verticalIn = Input.GetAxis("Vertical") * movementSpeed * speedLimiter; //* Time.deltaTime;
         horizontalIn = Input.GetAxis("Horizontal") * rotationSpeed * speedLimiter; //* Time.deltaTime;
 
         //And here we have the jump command.
-        if(checkGround() && Input.GetKeyDown(KeyCode.Space))
+        if (checkGround() && Input.GetKeyDown(KeyCode.Space))
         {
             rB.AddForce(Vector3.up * (jumpSpeed * speedLimiter), ForceMode.Impulse);
         }
 
         if (Input.GetMouseButtonDown(0) && Manager.fireRocket == true) //If M1 is pressed, we fire!
         {
-            Vector3 offset = new Vector3(transform.right.x * 0.65f, 0.7f, transform.right.z*0.65f);
+            Vector3 offset = new Vector3(transform.right.x * 0.65f, 0.7f, transform.right.z * 0.65f);
             GameObject newProjectile = Instantiate(playerProjectile, transform.position + offset, transform.rotation) as GameObject; //Creates the stinkin' projectile. In the future, it might be best to leave the rest of it as a script in the prefab.
         }
 
-        if (Input.GetKey(KeyCode.Z))
-        {
-            activeJetpack = true;
-        }
-        if (Input.GetKey(KeyCode.X))
-        {
-            activeJetpack = false;
-        }
+        if (Input.GetKeyDown(KeyCode.Z) && activeJetpack == false) { activeJetpack = true; } else if (Input.GetKeyDown(KeyCode.Z) && activeJetpack == true) { activeJetpack = false; }
 
         /*//No longer necessary, in lieu of the new movement system.
         //Being the "smart" guy I am, I get to drop Time.deltaTime from this calculation by doing it sooner.
@@ -75,22 +72,37 @@ public class characterplayer : MonoBehaviour
     }
     void FixedUpdate() // Run at every physics update. AND SUDDENLY IT STOPS WORKING GOD FUCKING DAMN IT. THANK YOU UNITY.
     {
+        if (checkGround() == false && airControl == false) //Disables air control if you're in the air and lack the jumpjet.
+        {
+            verticalIn = airMovementX;
+            horizontalIn = 0;
+        }
+        else
+        {
+            //airMovementY = horizontalIn;
+            airMovementX = verticalIn;
+        }
         //Rotational vector.
         Vector3 rotVec = Vector3.up * horizontalIn;
-        
+
         //Quaternions, my biggest enemy. Applies a angle to the character(?).
         Quaternion angleRot = Quaternion.Euler(rotVec * Time.fixedDeltaTime);
 
         //Moves and rotates the character based on key inputs.
-        rB.MovePosition(transform.position + transform.forward * verticalIn* Time.fixedDeltaTime);
+        rB.MovePosition(transform.position + transform.forward * verticalIn * Time.fixedDeltaTime);
         rB.MoveRotation(rB.rotation * angleRot);
 
         //Handle jetpacking!
         if (activeJetpack == true && Manager.checkJetpack == true)
         {
             Manager.checkJetpack = true;
+            airControl = true;
             rB.AddForce(Vector3.up * jetpackSpeed * speedLimiter, ForceMode.Impulse);
-        } else { activeJetpack = false; Manager.checkJetpack = false; }
+        }
+        else
+        {
+            activeJetpack = false; Manager.checkJetpack = false; airControl = false;
+        }
     }
 
     private bool checkGround() // I have no idea what this function is doing.
