@@ -130,6 +130,6 @@ MonoBehaviour:
   projectileMaxSpeed: 64
   projectileVelocity: 1.01
   projectileSpeed: 0
-  finalTime: 96
+  finalTime: 48
   primeTime: 32
   explosionObject: {fileID: 5675307288318622513, guid: 0fdba5a02a5ef434a8332182e497aa76, type: 3}

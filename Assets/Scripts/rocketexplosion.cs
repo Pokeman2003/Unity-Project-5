@@ -36,7 +36,7 @@ public class rocketexplosion : MonoBehaviour
             transform.localScale = new Vector3(finalSize, finalSize, finalSize);
         }
         if (time > timeFinal) {
-            Debug.Log("KABOOOOM!");
+            //Debug.Log("KABOOOOM!");
             Destroy(gameObject); //The explosion is complete. Nothing more must be done.
         }
     }

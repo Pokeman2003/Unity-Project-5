@@ -25,6 +25,8 @@ public class characterplayer : MonoBehaviour
     private bool airControl = false;
     private float airMovementX;
     //private float airMovementY;
+    private float softAltCap = 32f;
+    private float hardAltCap = 128f;
 
     //Horizontal and Vertical inputs. This is a new way to handle that, and explorercam.cs could probably use it, but explorercam.cs is just a generic placeholder.
     private float verticalIn;
@@ -97,7 +99,7 @@ public class characterplayer : MonoBehaviour
         {
             Manager.checkJetpack = true;
             airControl = true;
-            rB.AddForce(Vector3.up * jetpackSpeed * speedLimiter, ForceMode.Impulse);
+            rB.AddForce(Vector3.up * jetpackSpeed * speedLimiter * heightCheck(), ForceMode.Impulse);
         }
         else
         {
@@ -115,5 +117,20 @@ public class characterplayer : MonoBehaviour
 
         //Whatever it is, returns a bool... Which, at the current moment, NEVER returns true.
         return state;
+    }
+
+    private float heightCheck() // Just checks the current height and returns how much force should be maintained.
+    {
+        /*float now = 1f;
+        if (transform.position.y >= softAltCap && transform.position.y <= hardAltCap) {
+            rB.constraints = RigidbodyConstraints.FreezePositionY;
+            //now = now - ((transform.position.y - softAltCap) * (1 / (hardAltCap - softAltCap)) / 2);
+            //Manager.miscDBG1 = now;
+        } else if (transform.position.y > hardAltCap)
+        {
+            now = 0f;
+        }
+        return now;*/
+        return 1f;
     }
 }
