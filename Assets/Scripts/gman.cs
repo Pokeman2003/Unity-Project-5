@@ -58,7 +58,7 @@ public class gman : MonoBehaviour
     private int rFireSpeed = 150; //In milliseconds.
     private int rReload = 1200; // In milliseconds, how long until reload?
     private int rLoaded = 1; //How many rockets are loaded in currently?
-    private int rMax = 1; //How many rockets maximum can you hold?
+    private int rMax = 4; //How many rockets maximum can you hold?
     private int rBeginRecharge = 800; //800 milliseconds until you begin loading new rockets. Ignored if you don't have any left.
     private float rLastReload = 0f; //What was rRecharge the last time it reloaded?
     //Machine gun handling.
@@ -127,6 +127,7 @@ public class gman : MonoBehaviour
     {
         //Debug.Log("Deltatime currently is:" + Time.deltaTime * 100);
         rRecharge = rRecharge + Time.deltaTime;
+        rLastReload = rLastReload + Time.deltaTime;
         fRecharge = fRecharge + Time.deltaTime;
         jRecharge = jRecharge + Time.deltaTime;
         mRecharge = mRecharge + Time.deltaTime;
@@ -134,8 +135,14 @@ public class gman : MonoBehaviour
         //Debug.Log((float)fBeginRecharge / 1000 + " < " + fRecharge);
 
         if (((float)fBeginRecharge / 1000) < fRecharge && playerFuel < fuelMax) { playerFuel = playerFuel + Time.deltaTime; } else if (fBeginRecharge > fRecharge && playerFuel > fuelMax) { playerFuel = fuelMax; } //Refuel over time after landing.
-        if (((float)rBeginRecharge / 1000) < rRecharge && rLoaded < rMax) { rLoaded = rMax; rRecharge = 0; } else if (rBeginRecharge > rRecharge && rLoaded > rMax) { rLoaded = rMax; } //Reload after a shot. Needs to be rewritten.
-        if (((float)playerHPBeginRecharge /1000) < hRecharge && playerHP < playerMaxHP) { playerHP = playerHP + (playerHPRefill * Time.deltaTime); } else if (playerHPBeginRecharge > hRecharge  && playerHP > playerMaxHP) { playerHP = playerMaxHP; } //Horrendous health system.
+        
+        if (((float)playerHPBeginRecharge /1000) < hRecharge && playerHP < playerMaxHP) { playerHP = playerHP + (playerHPRefill * Time.deltaTime); } else if (playerHPBeginRecharge > hRecharge  && playerHP > playerMaxHP) { playerHP = playerMaxHP; } //Horrendous health system
+        
+        //if (((float)rBeginRecharge / 1000) < rRecharge && rLoaded < rMax) { rLoaded = rMax; rRecharge = 0; } else if (rBeginRecharge > rRecharge && rLoaded > rMax) { rLoaded = rMax; } //Reload after a shot. Needs to be rewritten.
+        if (((float)rBeginRecharge / 1000) < rRecharge && rLoaded < rMax) { // Reloads the rockets.
+            if (((float)rReload / 1000) < rLastReload) { rLoaded = rLoaded + 1; rLastReload = 0f; }
+        } else if (rBeginRecharge > rRecharge && rLoaded > rMax) { rLoaded = rMax; }
+
 
         if (jetPackActive == true) //Drain the fuel of the player.
         {
@@ -177,13 +184,13 @@ public class gman : MonoBehaviour
         //Rockets
         GUI.Box(new Rect(DotD + (DotDo * 150), 40, 150, 25), "Rockets");
         GUI.Box(new Rect(DotD + (DotDo * 150), 70, 150, 25), "dTime:" + rRecharge);
-        GUI.Box(new Rect(DotD + (DotDo * 150), 100, 150, 25), "Refill:" + rReload);
+        GUI.Box(new Rect(DotD + (DotDo * 150), 100, 150, 25), "Refill:" + rBeginRecharge);
         GUI.Box(new Rect(DotD + (DotDo * 150), 130, 150, 25), "Max:" + rMax);
-        GUI.Box(new Rect(DotD + (DotDo * 150), 160, 150, 25), "C.Refill:" + (fuelRefill * Time.deltaTime));
+        GUI.Box(new Rect(DotD + (DotDo * 150), 160, 150, 25), "Argh:" + (((float)rReload) / 1000) + "/" + rLastReload) ;
         GUI.Box(new Rect(DotD + (DotDo * 150), 190, 150, 25), "Is Ready:" + rReady);
         GUI.Box(new Rect(DotD + (DotDo * 150), 220, 150, 25), "Last Reload:" + rLastReload);
         GUI.Box(new Rect(DotD + (DotDo * 150), 250, 150, 25), "Recharge:" + rBeginRecharge + "/" + ((float)rBeginRecharge / 1000));
-        GUI.Box(new Rect(DotD + (DotDo * 150), 280, 150, 25), "Load time:" + rReload);
-         DotDo = 1;
+        GUI.Box(new Rect(DotD + (DotDo * 150), 280, 150, 25), "Load time:" + rReload + "/" + ((float)rReload / 1000));
+        DotDo = 1;
     }
 }
