@@ -1,9 +1,11 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - bulletbehavior
     - cameracharacter
     - characterplayer
     - gman
+    - pickupbehavior
     - rocketbehavior
     - rocketexplosion
     Unity.Rider.Editor.dll:
@@ -38,9 +40,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -49,6 +57,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2658}
     - Class: 114
+      Script: {instanceID: 2682}
+    - Class: 114
       Script: {instanceID: 4176}
     - Class: 114
       Script: {instanceID: 4598}
@@ -56,6 +66,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4732}
     - Class: 114
       Script: {instanceID: 7172}
+    - Class: 114
+      Script: {instanceID: 94170}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -65,6 +77,10 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -213,7 +229,7 @@ ScriptsOnlyBuild:
     className: CoroutineRunner
   - hash:
       serializedVersion: 2
-      Hash: 5c3489a5227e7c75914d3b314c1d6dc3
+      Hash: 45fb2cbbe2ca24f6d89b45d98a1f6124
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: characterplayer
@@ -555,7 +571,7 @@ ScriptsOnlyBuild:
     className: GlobalMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: ff088ae116edc66b57b8991318acb680
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: gman
@@ -889,8 +905,14 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: f972e7f594a2b7ee23095565190621dd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: bulletbehavior
   platform: 19
   scenePathNames:
   - Assets/Scenes/DefaultArena.unity
-  playerPath: C:/Users/VONTHADM/Documents/GitHub/Unity-Project-5/arenabuild/Rocket
+  playerPath: C:/Users/VONTHADM/Documents/GitHub/Unity-Project-5/pcbuilds/build2/Rocket
     Gallery.exe

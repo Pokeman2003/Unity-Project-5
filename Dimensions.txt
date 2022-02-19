@@ -5,3 +5,9 @@ Ground = 65, 61, 65
 Scale = 1/4th
 Bridge distances = 47 (adjusted with platform size=28)
 Spawn location size=5, 1.2, 5
+Armor size:1, 2.4, 2
+Bridge -
+Small floor block:15,1.2,2
+Large floor block:15,1.2,8
+9 bricks. LSLSLSLSL
+Slight correction. Apparently, bridges are 12 units long. This means every location should actually be 16.25+12. I can't remember which thing I measured 47 in, but it's definitely wrong.

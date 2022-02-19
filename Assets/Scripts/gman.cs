@@ -45,7 +45,7 @@ public class gman : MonoBehaviour
     private float fuelRefill = 0.5f; //How much per second?
     private float fuelMinimum = 3f; //How many seconds of fuel minimum to take off.
     private float fuelMax = 20f; //What's your maximum fuel?
-    private int fBeginRecharge = 480; //How long in milliseconds before you begin regaining fuel?
+    private int fBeginRecharge = 965; //How long in milliseconds before you begin regaining fuel?
     //Jumpjet handling
     private bool jumpJet = false; //Whether or not you own the JumpJet.
     private float jFuel = 3f; //3 seconds of jumpjet fuel.
@@ -55,17 +55,19 @@ public class gman : MonoBehaviour
     private int jBeginRecharge = 1; //How many milliseconds before you regain fuel? Has to be 1, otherwise the code will begin to just refuel in midflight. I think.
     //Rocket handling.
     private bool rReady = false;
-    private int rFireSpeed = 150; //In milliseconds.
+    private int rFireSpeed = 300; //In milliseconds.
     private int rReload = 1200; // In milliseconds, how long until reload?
     private int rLoaded = 1; //How many rockets are loaded in currently?
-    private int rMax = 4; //How many rockets maximum can you hold?
+    private int rMax = 1; //How many rockets maximum can you hold?
     private int rBeginRecharge = 800; //800 milliseconds until you begin loading new rockets. Ignored if you don't have any left.
     private float rLastReload = 0f; //What was rRecharge the last time it reloaded?
     //Machine gun handling.
-    private int mFireSpeed = 13; //How many milliseconds before firing another shot.
-    private int mReload = 500; //How many milliseconds for a reload?
+    private int mFireSpeed = 80; //How many milliseconds before firing another shot.
+    private int mReload = 1200; //How many milliseconds for a reload?
     private int mMax = 30; //How many rounds in the magazine max?
     private int mLoaded = 30; //How many rounds in the magazine now?
+    private bool mReloadNow = false;
+    private bool mReady = true;
     //Some strings
     private string HealthLabel = "HEALTH";
     public float miscDBG1;
@@ -109,7 +111,26 @@ public class gman : MonoBehaviour
     {
         get
         {
-            if (rLoaded > 0) { rLoaded = rLoaded - 1; rRecharge = 0; return true; } else { return false; }
+            if (rLoaded > 0 && rReady == true) { rLoaded = rLoaded - 1; rRecharge = 0; rReady = false; return true; } else { return false; }
+        }
+    }
+
+    public bool fireBullet
+    {
+        get
+        {
+            if (mLoaded > 0 && mReady == true) { mLoaded = mLoaded - 1; mRecharge = 0; mReady = false;} else { return false; } //Not returning if true, not yet.
+            if (mLoaded == 0) { mReloadNow = true; } //Reload if we literally just ran out of bullets.
+            return true; //And now we return.
+        }
+        set
+        {
+            if (mLoaded > mMax && mReloadNow ==false) {
+                mRecharge = 0f;
+                mLoaded = 0;
+                mReady = false;
+                mReloadNow = true;
+            }
         }
     }
 
@@ -139,10 +160,16 @@ public class gman : MonoBehaviour
         if (((float)playerHPBeginRecharge /1000) < hRecharge && playerHP < playerMaxHP) { playerHP = playerHP + (playerHPRefill * Time.deltaTime); } else if (playerHPBeginRecharge > hRecharge  && playerHP > playerMaxHP) { playerHP = playerMaxHP; } //Horrendous health system
         
         //if (((float)rBeginRecharge / 1000) < rRecharge && rLoaded < rMax) { rLoaded = rMax; rRecharge = 0; } else if (rBeginRecharge > rRecharge && rLoaded > rMax) { rLoaded = rMax; } //Reload after a shot. Needs to be rewritten.
-        if (((float)rBeginRecharge / 1000) < rRecharge && rLoaded < rMax) { // Reloads the rockets.
+        if (((float)rBeginRecharge / 1000) < rRecharge && rLoaded < rMax) { // Reloads the rockets. Now works properly.
             if (((float)rReload / 1000) < rLastReload) { rLoaded = rLoaded + 1; rLastReload = 0f; }
         } else if (rBeginRecharge > rRecharge && rLoaded > rMax) { rLoaded = rMax; }
 
+        if (((float)mReload/ 1000) < mRecharge && mReloadNow) { mReady = true; mLoaded = mMax; } //Reloads the machinegun.
+
+
+
+        if (((float)rFireSpeed / 1000) < rRecharge) { rReady = true; } //Ready the rocks for firing
+        if (((float)mFireSpeed / 1000) < mRecharge) { mReady = true; } //Likewise, readies the bull!
 
         if (jetPackActive == true) //Drain the fuel of the player.
         {
@@ -156,7 +183,7 @@ public class gman : MonoBehaviour
         GUI.Box(new Rect(20, 20, 150, 25), "HEALTH:" + (int)playerHP);
         GUI.Box(new Rect(20, 50, 150, 25), "FUEL:" + playerFuel);
         //GUI.Box(new Rect(20, 90, 150, 25), "JUMPJET:" + jFuel);
-        //GUI.Box(new Rect(20, 120, 150, 25), "MACHINE GUN:" + mLoaded);
+        GUI.Box(new Rect(20, 110, 150, 25), "MACHINE GUN:" + mLoaded + "/" + mMax);
         GUI.Box(new Rect(20, 80, 150, 25), "ROCKETS:" + rLoaded);
 
         //Debug of the day!
@@ -192,5 +219,9 @@ public class gman : MonoBehaviour
         GUI.Box(new Rect(DotD + (DotDo * 150), 250, 150, 25), "Recharge:" + rBeginRecharge + "/" + ((float)rBeginRecharge / 1000));
         GUI.Box(new Rect(DotD + (DotDo * 150), 280, 150, 25), "Load time:" + rReload + "/" + ((float)rReload / 1000));
         DotDo = 1;
+        GUI.Box(new Rect(DotD + (DotDo * 150), 40, 150, 25), "Machine Gun");
+        GUI.Box(new Rect(DotD + (DotDo * 150), 70, 150, 25), "dTime:" + mRecharge);
+        GUI.Box(new Rect(DotD + (DotDo * 150), 100, 150, 25), "Fire:" + mFireSpeed + "/" + ((float)mFireSpeed));
+        GUI.Box(new Rect(DotD + (DotDo * 150), 130, 150, 25), "Reload:" + mReload + "/" + ((float)mReload));
     }
 }

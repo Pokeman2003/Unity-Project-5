@@ -18,7 +18,9 @@ public class characterplayer : MonoBehaviour
     public float groundDistance = 0.1f; // ... I don't know what this is.
     public LayerMask groundLayer; // Our ground layer.
     //Projectile
+    private bool machineGun = false;
     public GameObject playerProjectile; //The projectile. Has to be installed in the Unity editor, much to my chagrin.
+    public GameObject altProjectile; //The machinegun projectile.
     //Jetpack.
     private bool activeJetpack = false;
     //Jumpjet
@@ -59,11 +61,30 @@ public class characterplayer : MonoBehaviour
             rB.AddForce(Vector3.up * (jumpSpeed * speedLimiter), ForceMode.Impulse);
         }
 
-        if (Input.GetMouseButtonDown(0) && Manager.fireRocket == true) //If M1 is pressed, we fire!
+        //Fire either rockets or bullets.
+        if (Input.GetMouseButtonDown(0) && machineGun == false) //If M1 is pressed, we fire!
         {
-            Vector3 offset = new Vector3(transform.right.x * 0.65f, 0.7f, transform.right.z * 0.65f);
-            GameObject newProjectile = Instantiate(playerProjectile, transform.position + offset, transform.rotation) as GameObject; //Creates the stinkin' projectile. In the future, it might be best to leave the rest of it as a script in the prefab.
+            if (Manager.fireRocket == true)
+            {
+                Vector3 offset = new Vector3(transform.right.x * 0.65f, 0.7f, transform.right.z * 0.65f);
+                GameObject newProjectile = Instantiate(playerProjectile, transform.position + offset, transform.rotation) as GameObject; //Creates the stinkin' projectile. In the future, it might be best to leave the rest of it as a script in the prefab.
+            }
         }
+        if (Input.GetMouseButton(0) && machineGun == true)
+        {
+            if (Manager.fireBullet == true)
+            {
+                Vector3 offset = new Vector3(transform.right.x * 0.65f, 0f, transform.right.z * 0.65f);
+                GameObject newProjectile = Instantiate(altProjectile, transform.position + offset, transform.rotation) as GameObject; //Huh... this seems familiar.
+            }
+        }
+
+        //Reload the gun.
+        if (machineGun && Input.GetKeyDown(KeyCode.R)) { Manager.fireBullet = true; }
+
+        //Swaps equipment.
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { machineGun = false; Manager.fireBullet = true; }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { machineGun = true; }
 
         if (Input.GetKeyDown(KeyCode.Z) && activeJetpack == false) { activeJetpack = true; } else if (Input.GetKeyDown(KeyCode.Z) && activeJetpack == true) { activeJetpack = false; }
 
@@ -119,7 +140,7 @@ public class characterplayer : MonoBehaviour
         return state;
     }
 
-    private float heightCheck() // Just checks the current height and returns how much force should be maintained.
+    private float heightCheck() // Just checks the current height and returns how much force should be maintained. Currently disabled.
     {
         /*float now = 1f;
         if (transform.position.y >= softAltCap && transform.position.y <= hardAltCap) {
