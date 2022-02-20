@@ -11,3 +11,16 @@ Small floor block:15,1.2,2
 Large floor block:15,1.2,8
 9 bricks. LSLSLSLSL
 Slight correction. Apparently, bridges are 12 units long. This means every location should actually be 16.25+12. I can't remember which thing I measured 47 in, but it's definitely wrong.
+Bottom side brick Middle:10, 2.4, 1
+Bottom side brick Edge:9, 2.4, 1
+Side brick type I:4,2.4,1
+Side brick type II:4,1.2,1
+Side brick type III:2,1.2,1
+Side brick type IV:3,2.4,1
+Positioning of the side bricks:I II I II I III IV III I II I II I
+bottom brick needs Y = .15
+Top brick needs Y = .75 or .6 based on I, IV or II, III 
+All bricks are offset by X=2
+I've fucked up the scaling here.
+I could fix all of the bridges but frankly, I don't want to.
+I'm just going to make III bigger and hope noone notices the strange discrepancy in gameply.

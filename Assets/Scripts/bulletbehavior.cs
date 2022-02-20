@@ -23,6 +23,17 @@ public class bulletbehavior : MonoBehaviour
         Debug.Log("Bullet hit " + item.gameObject.name + ".");
         switch (item.gameObject.name)
         {
+            //Destroy with ballistic collisions.
+            case "Bullet":
+                Destroy(gameObject);
+                break;
+            case "Explosion":
+                Destroy(gameObject);
+                break;
+            case "Rocket":
+                Destroy(gameObject);
+                break;
+
             default: //Richochet upon hitting something not useful.
                 Vector2 richoangle = new Vector2(Random.value *finalTime- 0.7f, Random.value * -finalTime - 0.7f);
                 Quaternion richochet = new Quaternion();

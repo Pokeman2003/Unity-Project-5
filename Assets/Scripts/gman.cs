@@ -63,7 +63,7 @@ public class gman : MonoBehaviour
     private float rLastReload = 0f; //What was rRecharge the last time it reloaded?
     //Machine gun handling.
     private int mFireSpeed = 80; //How many milliseconds before firing another shot.
-    private int mReload = 1200; //How many milliseconds for a reload?
+    private int mReload = 2400; //How many milliseconds for a reload?
     private int mMax = 30; //How many rounds in the magazine max?
     private int mLoaded = 30; //How many rounds in the magazine now?
     private bool mReloadNow = false;
@@ -164,7 +164,7 @@ public class gman : MonoBehaviour
             if (((float)rReload / 1000) < rLastReload) { rLoaded = rLoaded + 1; rLastReload = 0f; }
         } else if (rBeginRecharge > rRecharge && rLoaded > rMax) { rLoaded = rMax; }
 
-        if (((float)mReload/ 1000) < mRecharge && mReloadNow) { mReady = true; mLoaded = mMax; } //Reloads the machinegun.
+        if (((float)mReload/ 1000) < mRecharge && mReloadNow) { mReady = true; mLoaded = mMax; mReloadNow = false; } //Reloads the machinegun.
 
 
 

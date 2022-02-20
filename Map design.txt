@@ -16,3 +16,5 @@ OLB = Outer Left Backing
 References the one just left of the back piece.
 OF = Outer Front
 References the one all the way in the front.
+
+Platforms should be placed 28.25 apart, with bridges inbetween.
