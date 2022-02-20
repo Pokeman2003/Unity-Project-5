@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 16
   rotationSpeed: 96
-  jumpSpeed: 32
+  jumpSpeed: 48
   jetpackSpeed: 1.7
   Manager: {fileID: 0}
   groundDistance: 0.1

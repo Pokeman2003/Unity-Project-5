@@ -7,7 +7,7 @@ public class characterplayer : MonoBehaviour
     //Speeds.
     public float movementSpeed = 16f; //A little call back, ROBLOXians move at 16 studs a second.
     public float rotationSpeed = 96f; //For now, a slow, but manageable speed. I don't want a cap, I want mouse control in the future. Very important given the verticality of my game.
-    public float jumpSpeed = 32f; //How much velocity to add to our jump height.
+    public float jumpSpeed = 48f; //How much velocity to add to our jump height.
     public float jetpackSpeed = 1.7f; //How fast the jetpack actually is.
     private float speedLimiter = .5f; //A speed limiter applied to everything EXCEPT the jetpack.
 

@@ -61,13 +61,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4176}
     - Class: 114
-      Script: {instanceID: 4598}
+      Script: {instanceID: 4374}
     - Class: 114
-      Script: {instanceID: 4732}
+      Script: {instanceID: 4600}
     - Class: 114
-      Script: {instanceID: 7172}
+      Script: {instanceID: 4734}
     - Class: 114
-      Script: {instanceID: 94170}
+      Script: {instanceID: 7174}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -241,7 +241,7 @@ ScriptsOnlyBuild:
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
-      Hash: 1cde2b1d44cb47f6e54bd379424e4b6f
+      Hash: 982da562202403a342dcc296336f8494
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: pickupbehavior
@@ -503,6 +503,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnPointerClickMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: f972e7f594a2b7ee23095565190621dd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: bulletbehavior
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -905,13 +911,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: f972e7f594a2b7ee23095565190621dd
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: bulletbehavior
   platform: 20
   scenePathNames:
   - Assets/Scenes/DefaultArena.unity
-  playerPath: C:/Users/VONTHADM/Documents/GitHub/Unity-Project-5/pickupbuild
+  playerPath: C:/Users/VONTHADM/Documents/GitHub/Unity-Project-5/pickups2

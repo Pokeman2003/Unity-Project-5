@@ -76,37 +76,39 @@ extern void gman_get_fireRocket_mAAF37D234A8F189F42E61E36DBAE2FD46B2C5BFC (void)
 extern void gman_get_fireBullet_m09A105162184FE4D1AC1848B803F0892DCBFD7B2 (void);
 // 0x00000020 System.Void gman::set_fireBullet(System.Boolean)
 extern void gman_set_fireBullet_mF91668C72448C8912D3611BFC28E71CFF218A5BC (void);
-// 0x00000021 System.Void gman::Start()
+// 0x00000021 System.Void gman::giveItem(System.Byte)
+extern void gman_giveItem_mE7C07312827DE5D6F5D73C211B1A73A84F14C9FE (void);
+// 0x00000022 System.Void gman::Start()
 extern void gman_Start_m09E1EFA3277218887F274B04F4E8530C77896D8E (void);
-// 0x00000022 System.Void gman::Update()
+// 0x00000023 System.Void gman::Update()
 extern void gman_Update_m20D64DC8F46B005D52D6541D0E9C42C0391DE262 (void);
-// 0x00000023 System.Void gman::OnGUI()
+// 0x00000024 System.Void gman::OnGUI()
 extern void gman_OnGUI_m03852E8B00D7B6B44B862E4D95745A704E7BBEA0 (void);
-// 0x00000024 System.Void gman::.ctor()
+// 0x00000025 System.Void gman::.ctor()
 extern void gman__ctor_mD6B5C4AAF9969164F5AA0842BF91C48785968FC9 (void);
-// 0x00000025 System.Void pickupbehavior::Start()
+// 0x00000026 System.Void pickupbehavior::Start()
 extern void pickupbehavior_Start_mFA9A9E5D51B5E7796081CE9FBC8D8DB1F70002E5 (void);
-// 0x00000026 System.Void pickupbehavior::Update()
+// 0x00000027 System.Void pickupbehavior::Update()
 extern void pickupbehavior_Update_m43B85999594FCCADB071E68235E355DD0F6DBE5F (void);
-// 0x00000027 System.Void pickupbehavior::OnCollisionEnter(UnityEngine.Collision)
+// 0x00000028 System.Void pickupbehavior::OnCollisionEnter(UnityEngine.Collision)
 extern void pickupbehavior_OnCollisionEnter_mE69DEFEB6DC5D4844660E1B8F299D3A5A69E8A74 (void);
-// 0x00000028 System.Void pickupbehavior::.ctor()
+// 0x00000029 System.Void pickupbehavior::.ctor()
 extern void pickupbehavior__ctor_m6EC8D6D5EFE4602C39B58D61CFB7AFEF7A6BE818 (void);
-// 0x00000029 System.Void rocketbehavior::Start()
+// 0x0000002A System.Void rocketbehavior::Start()
 extern void rocketbehavior_Start_m56F738045799FCE41C287670A7D78A4A514D3FA2 (void);
-// 0x0000002A System.Void rocketbehavior::OnCollisionEnter(UnityEngine.Collision)
+// 0x0000002B System.Void rocketbehavior::OnCollisionEnter(UnityEngine.Collision)
 extern void rocketbehavior_OnCollisionEnter_m5EB2631A0214318E17E329292EAF530EA7BC8E87 (void);
-// 0x0000002B System.Void rocketbehavior::FixedUpdate()
+// 0x0000002C System.Void rocketbehavior::FixedUpdate()
 extern void rocketbehavior_FixedUpdate_mA74ABFCDFE67EA88C8EA43D8B9A9DF9C71D556D8 (void);
-// 0x0000002C System.Void rocketbehavior::.ctor()
+// 0x0000002D System.Void rocketbehavior::.ctor()
 extern void rocketbehavior__ctor_mCA41594157E6D73018969A9255BFFA848FEE20C0 (void);
-// 0x0000002D System.Void rocketexplosion::Start()
+// 0x0000002E System.Void rocketexplosion::Start()
 extern void rocketexplosion_Start_m0F28D5AA04ECC8443DC4FF4C0484C050461CCD99 (void);
-// 0x0000002E System.Void rocketexplosion::FixedUpdate()
+// 0x0000002F System.Void rocketexplosion::FixedUpdate()
 extern void rocketexplosion_FixedUpdate_m20E580F8F5438D736F79A6E0E4C99910EA0D695E (void);
-// 0x0000002F System.Void rocketexplosion::.ctor()
+// 0x00000030 System.Void rocketexplosion::.ctor()
 extern void rocketexplosion__ctor_mB368B09B25B2CAC018A726AD42C0E75593F01E6F (void);
-static Il2CppMethodPointer s_methodPointers[47] = 
+static Il2CppMethodPointer s_methodPointers[48] = 
 {
 	bulletbehavior_Start_m546B61CD02A297715D14048B7106469834475F30,
 	bulletbehavior_OnCollisionEnter_mBCD0B26D245CE78760752032A0F29B2FC73656DF,
@@ -140,6 +142,7 @@ static Il2CppMethodPointer s_methodPointers[47] =
 	gman_get_fireRocket_mAAF37D234A8F189F42E61E36DBAE2FD46B2C5BFC,
 	gman_get_fireBullet_m09A105162184FE4D1AC1848B803F0892DCBFD7B2,
 	gman_set_fireBullet_mF91668C72448C8912D3611BFC28E71CFF218A5BC,
+	gman_giveItem_mE7C07312827DE5D6F5D73C211B1A73A84F14C9FE,
 	gman_Start_m09E1EFA3277218887F274B04F4E8530C77896D8E,
 	gman_Update_m20D64DC8F46B005D52D6541D0E9C42C0391DE262,
 	gman_OnGUI_m03852E8B00D7B6B44B862E4D95745A704E7BBEA0,
@@ -156,61 +159,62 @@ static Il2CppMethodPointer s_methodPointers[47] =
 	rocketexplosion_FixedUpdate_m20E580F8F5438D736F79A6E0E4C99910EA0D695E,
 	rocketexplosion__ctor_mB368B09B25B2CAC018A726AD42C0E75593F01E6F,
 };
-static const int32_t s_InvokerIndices[47] = 
+static const int32_t s_InvokerIndices[48] = 
 {
-	651,
-	596,
-	651,
-	651,
-	651,
-	651,
-	651,
-	1457,
-	651,
-	651,
-	596,
-	596,
-	596,
-	651,
-	651,
-	651,
-	651,
-	645,
-	647,
-	651,
-	651,
-	651,
-	651,
-	631,
-	593,
-	631,
-	593,
-	645,
-	602,
-	645,
-	645,
-	602,
-	651,
-	651,
-	651,
-	651,
-	651,
-	651,
-	596,
-	651,
-	651,
-	596,
-	651,
-	651,
-	651,
-	651,
-	651,
+	652,
+	597,
+	652,
+	652,
+	652,
+	652,
+	652,
+	1459,
+	652,
+	652,
+	597,
+	597,
+	597,
+	652,
+	652,
+	652,
+	652,
+	646,
+	648,
+	652,
+	652,
+	652,
+	652,
+	632,
+	594,
+	632,
+	594,
+	646,
+	603,
+	646,
+	646,
+	603,
+	603,
+	652,
+	652,
+	652,
+	652,
+	652,
+	652,
+	597,
+	652,
+	652,
+	597,
+	652,
+	652,
+	652,
+	652,
+	652,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	47,
+	48,
 	s_methodPointers,
 	0,
 	NULL,

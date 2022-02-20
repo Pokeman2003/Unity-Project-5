@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GHands: {fileID: 0}
   Manager: {fileID: 0}
+  itemType: 1
 --- !u!95 &4546775194677667654
 Animator:
   serializedVersion: 4

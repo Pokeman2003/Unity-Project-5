@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GHands: {fileID: 0}
   Manager: {fileID: 0}
+  itemType: 3
 --- !u!65 &8114605877136260271
 BoxCollider:
   m_ObjectHideFlags: 0

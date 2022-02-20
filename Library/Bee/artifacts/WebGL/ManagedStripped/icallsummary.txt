@@ -60,8 +60,10 @@ UnityEngine.Gradient::Internal_Equals
 UnityEngine.Gradient::Init
 UnityEngine.Gradient::Cleanup
 UnityEngine.GUI::set_changed
+UnityEngine.GUIClip::get_visibleRect_Injected
 UnityEngine.GUILayoutUtility::Internal_GetWindowRect_Injected
 UnityEngine.GUILayoutUtility::Internal_MoveWindow_Injected
+UnityEngine.GUIStyle::IsTooltipActive
 UnityEngine.GUIStyle::get_stretchHeight
 UnityEngine.GUIStyle::get_stretchWidth
 UnityEngine.GUIStyle::GetRectOffsetPtr
@@ -74,6 +76,7 @@ UnityEngine.GUIStyle::Internal_Destroy
 UnityEngine.GUIStyle::Internal_Draw2_Injected
 UnityEngine.GUIStyle::Internal_Draw_Injected
 UnityEngine.GUIStyle::SetDefaultFont
+UnityEngine.GUIStyle::SetMouseTooltip_Injected
 UnityEngine.GUIStyle::set_rawName
 UnityEngine.GUIStyle::set_stretchHeight
 UnityEngine.GUIStyleState::Init

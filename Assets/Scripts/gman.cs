@@ -33,7 +33,9 @@ public class gman : MonoBehaviour
     private float playerHP = 1; //Generic value.
     private int playerMaxHP = 100; //Generic value.
     private int playerHPBeginRecharge = 3000; //How many milliseconds before you begin to recharge health?
-    private float playerHPRefill = 3f; //How much health do you regain per second?
+    private float playerHPRefill = 3f; //How much health do you regain per second?'
+    private bool hUpgrade = false;
+    //Recharge delatimers
     private float rRecharge = 0f; //How much deltatime has it been since Rocket usage.
     private float jRecharge = 0f; //How much deltatime has it been since Jumpjet usage.
     private float fRecharge = 0f; //How much deltatime has it been since jetpack(Flying) usage.
@@ -46,6 +48,7 @@ public class gman : MonoBehaviour
     private float fuelMinimum = 3f; //How many seconds of fuel minimum to take off.
     private float fuelMax = 20f; //What's your maximum fuel?
     private int fBeginRecharge = 965; //How long in milliseconds before you begin regaining fuel?
+    private bool fUpgrade = false;
     //Jumpjet handling
     private bool jumpJet = false; //Whether or not you own the JumpJet.
     private float jFuel = 3f; //3 seconds of jumpjet fuel.
@@ -61,6 +64,7 @@ public class gman : MonoBehaviour
     private int rMax = 1; //How many rockets maximum can you hold?
     private int rBeginRecharge = 800; //800 milliseconds until you begin loading new rockets. Ignored if you don't have any left.
     private float rLastReload = 0f; //What was rRecharge the last time it reloaded?
+    private bool rUpgrade = false;
     //Machine gun handling.
     private int mFireSpeed = 80; //How many milliseconds before firing another shot.
     private int mReload = 2400; //How many milliseconds for a reload?
@@ -70,9 +74,12 @@ public class gman : MonoBehaviour
     private bool mReady = true;
     //Some strings
     private string HealthLabel = "HEALTH";
+    private string AmmunitionLabel = "AMMUNITION";
     public float miscDBG1;
     public float miscDBG2;
     public float miscDBG3;
+
+    private byte win = 4;
 
 
     //Externals
@@ -134,6 +141,45 @@ public class gman : MonoBehaviour
         }
     }
 
+    public void giveItem(byte itemType) //Gives the item of choice. 
+    { 
+        switch(itemType)
+        {
+            case 1: // Armor upgrade.
+                if (hUpgrade == false) {
+                    Debug.Log("Armor armed!");
+                    hRecharge = 0f;
+                    playerMaxHP = playerMaxHP * 2;
+                    hUpgrade = true;
+                }
+                break;
+            case 2: // Rocket upgrade.
+                if (rUpgrade == false)
+                {
+                    Debug.Log("Rocket reserve expanded.");
+                    rUpgrade = true;
+                    rMax = rMax + 3;
+                    rRecharge = 0f;
+                }
+                break;
+            case 3: // Jumpjet upgrade.
+                if (jumpJet == false) { Debug.Log("Super mario mode activated!"); jumpJet = true; }
+                break;
+            case 4: // Jetpack upgrade.
+                if (fUpgrade == false) {
+                    Debug.Log("Jetpack ready!");
+                    fRecharge = 0f;
+                    fUpgrade = true;
+                    fuelMax = fuelMax * 3;
+                    fuelRefill = fuelRefill * 2;
+                }
+                break;
+            default:
+                Debug.Log("Something called to give an item, but there's no compatible itemtype.");
+                break;
+        }
+    }
+
     void Start()
     {
         
@@ -186,6 +232,13 @@ public class gman : MonoBehaviour
         GUI.Box(new Rect(20, 110, 150, 25), "MACHINE GUN:" + mLoaded + "/" + mMax);
         GUI.Box(new Rect(20, 80, 150, 25), "ROCKETS:" + rLoaded);
 
+        if (jumpJet == true && hUpgrade == true && rUpgrade == true && fUpgrade == true)
+        {
+            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), "Congratulations, you win!");
+        } else {
+            GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), "You have not yet collected all of the powerups.");
+         }
+
         //Debug of the day!
         int DotD = 1080; //DotD Offset
         GUI.Box(new Rect(DotD, 10, 150, 25), "DEBUG OF THE DAY");
@@ -209,7 +262,7 @@ public class gman : MonoBehaviour
         GUI.Box(new Rect(DotD + (DotDo * 150), 190, 150, 25), "Recharge:" + playerHPBeginRecharge+"/" + ((float)playerHPBeginRecharge / 1000));
         GUI.Box(new Rect(DotD + (DotDo * 150), 220, 150, 25), "True Health:" + playerHP);*/
         //Rockets
-        GUI.Box(new Rect(DotD + (DotDo * 150), 40, 150, 25), "Rockets");
+        /*GUI.Box(new Rect(DotD + (DotDo * 150), 40, 150, 25), "Rockets");
         GUI.Box(new Rect(DotD + (DotDo * 150), 70, 150, 25), "dTime:" + rRecharge);
         GUI.Box(new Rect(DotD + (DotDo * 150), 100, 150, 25), "Refill:" + rBeginRecharge);
         GUI.Box(new Rect(DotD + (DotDo * 150), 130, 150, 25), "Max:" + rMax);
@@ -222,6 +275,6 @@ public class gman : MonoBehaviour
         GUI.Box(new Rect(DotD + (DotDo * 150), 40, 150, 25), "Machine Gun");
         GUI.Box(new Rect(DotD + (DotDo * 150), 70, 150, 25), "dTime:" + mRecharge);
         GUI.Box(new Rect(DotD + (DotDo * 150), 100, 150, 25), "Fire:" + mFireSpeed + "/" + ((float)mFireSpeed));
-        GUI.Box(new Rect(DotD + (DotDo * 150), 130, 150, 25), "Reload:" + mReload + "/" + ((float)mReload));
+        GUI.Box(new Rect(DotD + (DotDo * 150), 130, 150, 25), "Reload:" + mReload + "/" + ((float)mReload));*/
     }
 }
